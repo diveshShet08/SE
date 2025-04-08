@@ -52,18 +52,6 @@ class Backtester:
         self.save_results()
         return self.metrics.calculate(self.results)
 
-    # def run(self):
-    #     for signal in self.strategy:
-    #         idx, typee, position_size, sl, tp = signal['row'],signal['type'],signal['price'],signal['sl'],signal['tp'],
-    #         if typee != "HOLD":
-
-    #             trade = self.execution.execute_trade(idx, typee, position_size, sl, tp)
-    #             self.logger.log_trade(trade)
-    #             self.results.append(trade)
-        
-    #     self.save_results(  )
-    #     return self.metrics.calculate(self.results)
-
     def check_exit_condition(self, price_data, sl, tp, trade_type):
         """
         Determines whether SL or TP is hit first.
@@ -110,8 +98,9 @@ if __name__ == "__main__":
     strategy_config = dict(item.split(":") for item in args.config.split(","))
     
     # Load historical market data
-    file_path = f"/home/niveus/Downloads/SE/base_v1/SE/src/data/historical/{currency_pair}.csv"
-                # /home/niveus/Downloads/SE/base_v1/SE/src/data/historical/AUDCAD.csv
+    # file_path = f"/home/niveus/Downloads/SE/base_v1/SE/src/data/historical/{currency_pair}.csv"
+    #             # /home/niveus/Downloads/SE/base_v1/SE/src/data/historical/AUDCAD.csv
+    file_path = os.path.join(os.getcwd(), "src", "data", "historical", f"{currency_pair}.csv")
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Historical data file not found: {file_path}")
     
@@ -134,3 +123,4 @@ if __name__ == "__main__":
     print(performance_report)
 
 # python3 backtesting/backtester.py --symbol "AUDCAD" --strategy "BollingerBands" --timeframes "5min,15min" --config "window:20,num_std:2"
+# python3 -m src.backtesting.backtester --symbol "AUDCAD" --strategy "CombinedStrategyBB_RSI" --timeframes "5min,15min" --config "window:20,num_std:2"
