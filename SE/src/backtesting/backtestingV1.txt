@@ -1,0 +1,41 @@
+Backtesting Function - Inputs & Outputs
+Before we start coding, here's a detailed breakdown of all input arguments (their formats with examples) and return values (their formats with examples).
+
+🔹 Input Arguments
+Parameter	Type	Description	Example
+symbol	str	Currency pair to be backtested	"EURUSD"
+strategy	Strategy class instance	Instance of strategy class	BollingerBandsStrategy(config)
+timeframes	list[str]	List of timeframes used in backtesting	["M5", "M15", "H1"]
+strategy_config	dict	Strategy-specific configuration parameters	{"bollinger_period": 20, "std_dev": 2}
+capital	float	Starting capital for backtesting	10_000.00
+risk_per_trade	float	Percentage of capital risked per trade	0.02 (2%)
+spread	float	Market spread in pips	0.1
+historical_data_path	str	Path to historical data (5m OHLC CSV)	"src/data/historical/EURUSD.csv"
+logging_enabled	bool	Whether to log trades in a CSV file	True
+output_dir	str	Path to store backtesting results	"src/backtesting/2025-03-23/iteration_1.csv"
+🔹 Return Values
+Return Type	Description	Example
+dict (performance_summary)	Key performance metrics summary	{"total_pnl": 1500.5, "win_rate": 0.55, "max_drawdown": -5.2}
+pd.DataFrame (trade_log)	Detailed trade log with entry/exit points	(See below)
+dict (equity_curve)	Equity over time	{timestamp: equity_value}
+🔸 Example trade_log (Pandas DataFrame)
+Trade ID	Symbol	Entry Time	Exit Time	Entry Price	Exit Price	P/L	Trade Type	Position Size
+1	EURUSD	10:05:00	10:30:00	1.1050	1.1080	+30.0	BUY	0.1 lot
+2	EURUSD	11:15:00	11:45:00	1.1100	1.1085	-15.0	SELL	0.2 lot
+🔹 Flow of Data Processing
+Read Historical Data → Read CSV from src/data/historical/{symbol}.csv
+
+Initialize Strategy → Pass strategy_config into the strategy instance
+
+Iterate Through Candles → Generate trade signals from strategy.py
+
+Trade Execution & Capital Management → Apply trade execution rules
+
+Trade Logging & Visualization → Store trade details and update performance
+
+Calculate Performance Metrics → Compute PnL, win rate, drawdown, etc.
+
+Save Results → Store results in src/backtesting/{date}/{iteration}.csv
+
+Return → Summary stats, trade log DataFrame, equity curve dict.
+

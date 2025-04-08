@@ -1,0 +1,18 @@
+🔹 Function Inputs & Their Formats
+Parameter	Type	Example Value	Description
+data	pd.DataFrame	OHLCV dataframe for backtesting.	Historical price data.
+bollinger_period	int	20	Lookback period for Bollinger Bands.
+bollinger_std	float	2.0	Standard deviation for bands.
+rsi_period	int	14	RSI lookback period.
+rsi_oversold	int	30	RSI threshold for buy setups.
+rsi_overbought	int	70	RSI threshold for sell setups.
+atr_period	int	14	ATR lookback period.
+sl_atr_multiplier	float	1.5	SL distance (ATR-based).
+tp_type	str	"opposite_band" / "fixed_rr"	Profit target method.
+max_sl_pips	float	30	Hard stop-loss cap (pips).
+risk_per_trade	float (0-1)	0.02	Risk per trade (as fraction of account balance).
+allow_trailing	bool	True	Enable trailing stop?
+📌 Expected Return Values
+Return Value	Type	Example Value	Description
+entry_signal	list[dict]	[{'type': 'BUY', 'price': 1.0830, 'sl': 1.0810, 'tp': 1.0880}]	List of trade signals with entry, SL, and TP levels.
+trade_logs	dict	{'total_trades': 100, 'win_rate': 70, 'avg_rr': 1.5}	Summary statistics for trade performance.

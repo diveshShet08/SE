@@ -1,0 +1,8 @@
+fastapi==0.110.0     # Web framework for building the API
+uvicorn==0.29.0      # ASGI server to run FastAPI
+pandas==2.2.1        # Data handling & market data processing
+numpy==1.26.4        # Numerical operations & technical indicators
+pydantic==2.7.0      # Data validation for API requests & responses
+scipy==1.13.0        # Advanced statistical & mathematical functions
+matplotlib==3.8.3    # Plotting indicators & strategy performance
+

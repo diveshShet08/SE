@@ -1,0 +1,73 @@
+🔹 Assumptions in V1
+Market & Data Assumptions
+✅ Candle-Based Execution:
+
+Trades are executed only after a candle is completed (no intra-candle execution).
+
+Entry and exit occur at the candle’s open price after a signal is generated.
+
+✅ Historical Data Format:
+
+Data is stored as 5-minute OHLC candles in CSV files under src/data/historical/{currency_pair}.csv.
+
+We assume clean, preprocessed data (no missing values, gaps, or outliers).
+
+✅ Spread is Fixed:
+
+A constant spread (e.g., 0.1 pips) is applied to all trades. No slippage or commissions for now.
+
+✅ Only Market Orders:
+
+No pending orders (e.g., limit or stop orders). Only market execution after signal confirmation.
+
+Trading & Risk Management Assumptions
+✅ One Trade Per Signal:
+
+No simultaneous long and short positions. Each signal results in one trade.
+
+✅ Full Position Close at TP or SL:
+
+When a take-profit (TP) or stop-loss (SL) is hit, the full position is closed. No partial exits or trailing stops in V1.
+
+✅ Position Sizing is Handled by Strategy:
+
+Strategy defines position size based on a fixed percentage of capital (risk_per_trade).
+
+No external risk model; risk-adjusted sizing is strategy-dependent.
+
+✅ Capital is Tracked But No Reinvestment Logic:
+
+Profits/losses are accounted for, but there’s no compounding (e.g., increasing position size after wins).
+
+🔹 Core Functionalities in V1
+📌 1. Data Loading & Preprocessing
+🔹 Reads historical data from src/data/historical/{symbol}.csv.
+🔹 Converts timestamps into a unified format for multi-timeframe processing.
+🔹 Ensures data integrity before running backtest.
+
+📌 2. Strategy Execution & Signal Generation
+🔹 Calls strategy.py to compute entry & exit signals for each candle.
+🔹 Supports multi-timeframe confirmation logic (but does NOT train ML models).
+🔹 Uses the full candle’s OHLC data to generate decisions.
+
+📌 3. Trade Execution & Capital Management
+🔹 Executes market orders only at candle open if a signal is valid.
+🔹 Updates account balance & equity after every trade.
+🔹 Applies fixed spread to simulate realistic market conditions.
+
+📌 4. Trade Logging & Performance Analysis
+🔹 Saves detailed trade logs in src/backtesting/{date}/{iteration}.csv.
+🔹 Computes key metrics:
+
+Total PnL, Win Rate, Max Drawdown, Sharpe Ratio
+
+Profit Factor, Expectancy, Average Trade Return
+🔹 Generates equity curve and basic visualizations.
+
+🔹 Features Delayed for Later Iterations
+✅ Multi-Asset & Multi-Timeframe Testing → Pinned for later (Improvement 1)
+✅ Interactive Visualizations & Reports → Pinned for later (Improvement 5)
+✅ Partial Take-Profits & Trailing Stops → Will revisit later
+✅ Advanced Position Sizing (Kelly Criterion, ATR-based Sizing, etc.) → Left for future iterations
+✅ Dynamic Slippage & Variable Spread Modeling → Fixed spread for now
+

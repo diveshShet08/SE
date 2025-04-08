@@ -1,0 +1,81 @@
+🔹 Improvements to Revisit in Future Versions
+These are the areas we discussed but will not implement in Version 1. We'll revisit them once the first iteration is stable.
+
+✅ 1. Multi-Asset & Multi-Timeframe Testing (Improvement 1)
+🔹 Current Approach (V1):
+
+Backtesting only supports one currency pair at a time.
+
+Strategy logic is applied only to a single timeframe (5 min).
+
+🔹 Future Improvement:
+
+Allow multi-asset backtesting (run the same strategy on multiple pairs simultaneously).
+
+Enable multi-timeframe confirmations (e.g., using 1-hour & 4-hour charts for trend direction while entering trades on a 5-min chart).
+
+✅ 2. Interactive Visualizations & Reports (Improvement 2)
+🔹 Current Approach (V1):
+
+Performance metrics are logged in CSV files.
+
+Basic plots like PnL, equity curve, and drawdown are static.
+
+🔹 Future Improvement:
+
+Interactive trade visualization using Plotly or Dash.
+
+Ability to replay trades on historical charts.
+
+Generate automated PDF reports for each backtest session.
+
+✅ 3. Partial Take-Profits & Trailing Stops
+🔹 Current Approach (V1):
+
+Full position is closed at either TP (Take Profit) or SL (Stop Loss).
+
+No scaling out of trades or dynamic SL adjustments.
+
+🔹 Future Improvement:
+
+Allow partial exits (e.g., exit 50% at 1R, move SL to breakeven).
+
+Implement trailing stops (e.g., move SL after price moves favorably).
+
+✅ 4. Advanced Position Sizing
+🔹 Current Approach (V1):
+
+Strategy defines fixed risk per trade (e.g., 1% of capital).
+
+🔹 Future Improvement:
+
+Implement dynamic position sizing based on:
+
+ATR-based sizing (volatility-adjusted lot sizes).
+
+Kelly Criterion or optimal f methods.
+
+Monte Carlo simulations to test risk models.
+
+✅ 5. Dynamic Slippage & Variable Spread Modeling
+🔹 Current Approach (V1):
+
+Assumes fixed spread (e.g., 0.1 pips).
+
+🔹 Future Improvement:
+
+Introduce variable spread based on historical market conditions.
+
+Add slippage models to simulate real execution conditions.
+
+✅ 6. Strategy Optimization & Walk-Forward Testing
+🔹 Current Approach (V1):
+
+Uses static strategy parameters for backtesting.
+
+🔹 Future Improvement:
+
+Implement grid search or genetic algorithms to optimize strategy parameters.
+
+Introduce walk-forward testing (test optimized parameters on unseen data).
+
